@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Project
+p="$1"
+# Output directory
+d="${2:-$p}"
+p="$(echo "$p" | tr A-Z a-z)"
+url="http://$p.googlecode.com/svn/"
+
+git svn clone --stdlayout --tags=tags --branches=wiki --prefix=googlecode/ "$url" "$d" || exit $?
+
+cd "$d"
+"$(dirname "$0")"/GoogleCode-fix-author
+rm -Rf .git/refs/original

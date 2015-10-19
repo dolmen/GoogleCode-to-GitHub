@@ -1,0 +1,21 @@
+#!/bin/bash
+
+git filter-branch --env-filter '
+    oldname="olivier.mengue"
+    oldemail="olivier.mengue@43c74cf8-51ec-11de-b413-c5e99dc0a8e2"
+    newname="Olivier Mengué"
+    newemail="dolmen@cpan.org"
+    [ "$GIT_AUTHOR_EMAIL" = "$oldemail" ] && GIT_AUTHOR_EMAIL="$newemail"
+    [ "$GIT_COMMITTER_EMAIL" = "$oldemail" ] && GIT_COMMITTER_EMAIL="$newemail"
+    [ "$GIT_AUTHOR_NAME" = "$oldname" ] && GIT_AUTHOR_NAME="$newname"
+    [ "$GIT_COMMITTER_NAME" = "$oldname" ] && GIT_COMMITTER_NAME="$newname"
+    oldname="(no author)"
+    oldemail="(no author)@43c74cf8-51ec-11de-b413-c5e99dc0a8e2"
+    newname="Google Code"
+    newemail="hosting@code.google.com"
+    [ "$GIT_AUTHOR_EMAIL" = "$oldemail" ] && GIT_AUTHOR_EMAIL="$newemail"
+    [ "$GIT_COMMITTER_EMAIL" = "$oldemail" ] && GIT_COMMITTER_EMAIL="$newemail"
+    [ "$GIT_AUTHOR_NAME" = "$oldname" ] && GIT_AUTHOR_NAME="$newname"
+    [ "$GIT_COMMITTER_NAME" = "$oldname" ] && GIT_COMMITTER_NAME="$newname"
+    :
+    ' -- --all
